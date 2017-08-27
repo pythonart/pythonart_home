@@ -92,7 +92,7 @@ USE_MODELTRANSLATION = False
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['www.pythonart.com','pythonart.com','139.59.29.165']
+ALLOWED_HOSTS = ['www.pythonart.com','pythonart.com','139.59.29.165','127.0.0.1',]
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -253,9 +253,9 @@ INSTALLED_APPS = (
     "mezzanine.forms",
     "mezzanine.galleries",
     "mezzanine.twitter",
-	
-    # "mezzanine.accounts",
-    # "mezzanine.mobile",
+    "artusers",
+    "mezzanine.accounts",
+    "mezzanine.mobile",
 )
 
 # List of middleware classes to use. Order is important; in the request phase,
@@ -341,3 +341,23 @@ except ImportError:
     pass
 else:
     set_dynamic_settings(globals())
+
+ACCOUNTS_PROFILE_MODEL="artusers.MyProfile"
+
+PROFILE_URL="profile"
+
+ACCOUNTS_PROFILE_VIEWS_ENABLED=True  # Users are able to see their profile.
+ACCOUNTS_NO_USERNAME=True  # Does not expose username to user. Only email address.
+ACCOUNTS_VERIFICATION_REQUIRED=True # Email Verification
+ACCOUNTS_APPROVAL_REQUIRED=False    # Accounts to be verified by Amin/Staff 
+
+
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' #Production
+#EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend' #Console
+EMAIL_HOST = 'smtp.sparkpostmail.com'
+
+
+EMAIL_HOST_USER = 'SMTP_Injection' #my gmail username
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = "info@pythonart.com"
